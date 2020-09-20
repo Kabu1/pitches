@@ -1,9 +1,21 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from .config import DevConfig
+from flask_sqlalchemy import SQLAlchemy
 
-#initializing application
-app = Flask(__name__)
+bootstrap = Bootstrap()
+db = SQLAlchemy()
 
-# Setting up configuration
-app.config.from_object(DevConfig)
-from app import views
+def create_app(config_name):
+    app = Flask(__name__)
+
+    # 
+
+    # Initializing flask extensions
+    bootstrap.init_app(app)
+    db.init_app(app)
+
+
+    # Setting up configuration
+    app.config.from_object(DevConfig)
+    from app import views
