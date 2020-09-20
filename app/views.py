@@ -7,4 +7,5 @@ def index():
     '''
     view root page function that returns the index page and its date
     '''
-    return render_template('index.html')
+    title = 'Home - Welcome to the Pitch Website'
+    return render_template('index.html',title=title)
