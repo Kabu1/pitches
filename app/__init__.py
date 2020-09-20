@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from .config import DevConfig
+from config import DevConfig
 from flask_sqlalchemy import SQLAlchemy
 
 bootstrap = Bootstrap()
@@ -18,4 +18,4 @@ def create_app(config_name):
 
     # Setting up configuration
     app.config.from_object(DevConfig)
-    from app import views
+    return app
