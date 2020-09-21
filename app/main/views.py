@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for,abort
 from app import app
 from flask_login import login_required
 
@@ -8,25 +8,23 @@ def index():
     '''
     view root page function that returns the index page and its date
     '''
-    title = 'Home - Welcome to the Pitch Website'
+    title = 'Home - Welcome to Pitch'
     return render_template('index.html',title=title)
 
-@main.route('/',methods = ['GET', 'POST'])
-
-def index():
-
+@main.route('/user/<uname>')
+def profile(uname):
     '''
-    View root page function that returns the index page and its data
+    View profile page function that returns the profile page and its data
     '''
-    general = Pitch.query.filter_by(category="general").order_by(Pitch.posted.desc()).all()
-    project = Pitch.query.filter_by(category="project").order_by(Pitch.posted.desc()).all()
-    advertisement = Pitch.query.filter_by(category="advertisement").order_by(Pitch.posted.desc()).all()
-    sale = Pitch.query.filter_by(category="sale").order_by(Pitch.posted.desc()).all()
+    user = User.query.filter_by(username = uname).first()
+    title = f"{uname.capitalize()}'s Profile"
 
-    pitch = Pitch.query.filter_by().first()
-    likes = Like.get_all_likes(pitch_id=Pitch.id)
-    dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
+    get_pitches = Pitch.query.filter_by(author = User.id).all()
+    get_comments = Comment.query.filter_by(user_id = User.id).all()
+    get_likes = Like.query.filter_by(user_id = User.id).all()
+    get_dislikes = Dislike.query.filter_by(user_id = User.id).all()
 
+    if user is None:
+        abort (404) 
 
-    title = 'Home | One Min Pitch'
-    return render_template('index.html', title = title, pitch = pitch, general = general, project = project, advertisement = advertisement, sale = sale, likes=likes, dislikes=dislikes)
+    return render_template("profile/profile.html", user = user, title=title, pitches_no = get_pitches, comments_no = get_comments, likes_no = get_likes, dislikes_no = get_dislikes)
