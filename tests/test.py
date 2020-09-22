@@ -1,5 +1,6 @@
 import unittest
-from app.models import User
+from app.models import Pitch, User, Comment
+from app import db
 
 
 class UserModelTest(unittest.TestCase):
@@ -16,12 +17,6 @@ class UserModelTest(unittest.TestCase):
 
     def test_password_verification(self):
         self.assertTrue(self.new_user.verify_password('banana'))
-        
-        
-        import unittest
-from app.models import Pitch, User, Comment
-from app import db
-
 
 
 class PitchTest(unittest.TestCase):
@@ -34,7 +29,7 @@ class PitchTest(unittest.TestCase):
         Set up method that will run before every Test
         '''
 
-        self.user = User(username = 'cliff', password = 'banana', email = 'cliff@gmail.com')
+        self.user = User(username = 'moringa', password = 'banana', email = 'flaskemailmoringa@gmail.com')
         self.new_comment = Comment(comment = 'comment', pitch_id = 1, user_id=self.user)
         self.new_pitch = Pitch(id=1, title="Pitch", body='pitches',category='Interview',writer = self.user,comment = self.new_comment)
 
