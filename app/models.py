@@ -100,8 +100,6 @@ class Comment(db.Model):
         comments = Comment.query.order_by('id').all()
         return comments
 
-
-
 class Like (db.Model):
     __tablename__ = 'likes'
 
@@ -123,12 +121,10 @@ class Like (db.Model):
         like = Like.query.filter_by(pitch_id=id).all()
         return like
 
-
     @classmethod
     def get_all_likes(cls,pitch_id):
         likes = Like.query.order_by('-id').all()
         return likes
-
 
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'

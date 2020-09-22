@@ -2,7 +2,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 from . import main 
 from flask_login import login_required, current_user
 from .forms import UpdateProfile, GeneralForm, GeneralReviewForm, SaleForm, SaleReviewForm, ProjectForm, ProjectReviewForm, AdvertisementForm, AdvertisementReviewForm
-from .. import db
+from .. import db, photos
 from sqlalchemy import func
 from ..models import User, Advertisement, Project, Sale, General, ReviewAdvertisement, ReviewGeneral, ReviewProject, ReviewSale, Upvote, Downvote
 
