@@ -1,19 +1,19 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
+from flask import render_template, redirect, url_for, abort, request
 from . import main 
 from flask_login import login_required, current_user
-from .forms import UpdateProfile, GeneralForm, GeneralReviewForm, SaleForm, SaleReviewForm, ProjectForm, ProjectReviewForm, AdvertisementForm, AdvertisementReviewForm
+from .forms import UpdateProfile, GeneralForm, GeneralReviewForm, SaleForm, SaleReviewForm, ProjectForm, ProjectReviewForm, AdvertisementForm, AdvertisementReviewForm, PitchForm, CommentForm
 from .. import db, photos
 from sqlalchemy import func
-from .. models import User, Role, Pitch, Comment, Like, Dislike
+from .. models import User, Pitch, Comment, Like, Dislike
 
-#@main.route('/')
+@main.route('/')
 def index():
-    """
-    View root page function that returns the index page and its data
-    """
-    title = 'Home - Welcome to The Pitch website'
+   """
+  View root page function that returns the index page and its data
+  """
+   title = 'Home - Welcome to The Pitch website'
 
-    return render_template('index.html', title=title)
+   return render_template('index.html', title=title)
 
 
 @main.route('/user/<uname>/update', methods=['GET', 'POST'])
@@ -38,7 +38,7 @@ def update_profile(uname):
 
 @main.route('/',methods = ['GET', 'POST'])
 
-def index():
+def index3():
 
     '''
     View root page function that returns the index page and its data
@@ -77,27 +77,6 @@ def profile(uname):
     return render_template("profile/profile.html", user = user, title=title, pitches_no = get_pitches, comments_no = get_comments, likes_no = get_likes, dislikes_no = get_dislikes)
 
 
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
-@login_required
-def update_profile(uname):
-    '''
-    View update profile page function that returns the update profile page and its data
-    '''
-    user = User.query.filter_by(username = uname).first()
-    if user is None:
-        abort(404)
-
-    form = UpdateProfile()
-
-    if form.validate_on_submit():
-        user.bio = form.bio.data
-
-        db.session.add(user)
-        db.session.commit()
-
-        return redirect(url_for('.profile',uname=user.username))
-
-    return render_template('profile/update.html',form =form)
 
 
 @main.route('/user/<uname>/update/pic',methods=['POST'])

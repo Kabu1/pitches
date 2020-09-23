@@ -9,7 +9,7 @@ class UserModelTest(unittest.TestCase):
         self.new_user = User(password='banana')
 
     def test_password_setter(self):
-        self.assertTrue(self.new_user.pass_secure is not None)
+        self.assertTrue(self.new_user.password_hash is not None)
 
     def test_no_access_password(self):
         with self.assertRaises(AttributeError):
@@ -30,8 +30,8 @@ class PitchTest(unittest.TestCase):
         '''
 
         self.user = User(username = 'moringa', password = 'banana', email = 'flaskemailmoringa@gmail.com')
-        self.new_comment = Comment(comment = 'comment', pitch_id = 1, user_id=self.user)
-        self.new_pitch = Pitch(id=1, title="Pitch", body='pitches',category='Interview',writer = self.user,comment = self.new_comment)
+        self.new_comment = Comment(comment_content= 'comment', pitch_id = 1, user_id=self.user)
+        self.new_pitch = Pitch(id=1, title="Pitch", body='pitches',category='Advertisement',writer = self.user,comments = self.new_comment)
 
     def tearDown(self):
         Pitch.query.delete()
@@ -41,7 +41,7 @@ class PitchTest(unittest.TestCase):
         self.assertEquals(self.new_pitch.id,1)
         self.assertEquals(self.new_pitch.title,'Pitch')
         self.assertEquals(self.new_pitch.body,'pitches')
-        self.assertEquals(self.new_pitch.category,"Interview")
+        self.assertEquals(self.new_pitch.category,"Advertisement")
         self.assertEquals(self.new_pitch.writer,self.user)
         self.assertEquals(self.new_pitch.comment,self.new_comment)
 
