@@ -4,9 +4,9 @@ from flask_login import login_required, current_user
 from .forms import UpdateProfile, GeneralForm, GeneralReviewForm, SaleForm, SaleReviewForm, ProjectForm, ProjectReviewForm, AdvertisementForm, AdvertisementReviewForm
 from .. import db, photos
 from sqlalchemy import func
-from ..models import User, Advertisement, Project, Sale, General, ReviewAdvertisement, ReviewGeneral, ReviewProject, ReviewSale, Upvote, Downvote
+from .. models import User, Role, Pitch, Comment, Like, Dislike
 
-@main.route('/')
+#@main.route('/')
 def index():
     """
     View root page function that returns the index page and its data

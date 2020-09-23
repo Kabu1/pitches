@@ -11,7 +11,6 @@ login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 mail = Mail()
 
-
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 photos = UploadSet('photos',IMAGES)
@@ -22,7 +21,7 @@ def create_app(config_name):
 
 
     app.config.from_object(config_options[config_name])
-    config_options[config_name].init_app(app)
+   # config_options[config_name].init_app(app)
 
     # Initializing flask extensions
     bootstrap.init_app(app)

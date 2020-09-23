@@ -5,13 +5,16 @@ class Config:
     '''
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://k:qwerty1234@localhost/pitches'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("flaskemailmoringa@gmail.com")
     MAIL_PASSWORD = os.environ.get("qazplm098")
+
+    
+
 class ProdConfig(Config):
     '''
     Production  configuration child class
