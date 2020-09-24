@@ -13,8 +13,8 @@ class GeneralForm(FlaskForm):
     submit = SubmitField('Submit')
     
 class PitchForm(FlaskForm):
-    pitch_title = StringField('Title', validators=[Required()])
-    content = TextAreaField('Pitch', validators=[Required()])
+    title = StringField('Title', validators=[Required()])
+    body = TextAreaField('Pitch', validators=[Required()])
     category = SelectField('Category', choices=[('Advertisement','Advertisement Pitch'),('Project','Project Pitch'),('General','General Pitch'),('Sale','Sale Pitch')], validators=[Required()])
     submit = SubmitField('Write Pitch!')
 

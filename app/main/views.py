@@ -7,7 +7,7 @@ from sqlalchemy import func
 from .. models import User, Pitch, Comment, Like, Dislike
 
 @main.route('/')
-def index():
+def index3():
    """
   View root page function that returns the index page and its data
   """
@@ -38,7 +38,7 @@ def update_profile(uname):
 
 @main.route('/',methods = ['GET', 'POST'])
 
-def index3():
+def index():
 
     '''
     View root page function that returns the index page and its data
@@ -53,7 +53,7 @@ def index3():
     dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
 
 
-    title = 'Home | One Min Pitch'
+    title = 'Home | Pitches'
     return render_template('index.html', title = title, pitch = pitch, general = general, project = project, advertisement = advertisement, sale = sale, likes=likes, dislikes=dislikes)
 
 
@@ -66,7 +66,7 @@ def profile(uname):
     user = User.query.filter_by(username = uname).first()
     title = f"{uname.capitalize()}'s Profile"
 
-    get_pitches = Pitch.query.filter_by(author = User.id).all()
+    get_pitches = Pitch.query.filter_by(writer = User.id).all()
     get_comments = Comment.query.filter_by(user_id = User.id).all()
     get_likes = Like.query.filter_by(user_id = User.id).all()
     get_dislikes = Dislike.query.filter_by(user_id = User.id).all()
@@ -107,7 +107,7 @@ def index2():
     sale = Pitch.query.filter_by(category="sale").order_by(Pitch.date.desc()).all()
     pitch = Pitch.get_all_pitches()
 
-    title = 'Home | One Min Pitch'
+    title = 'Home | Pitches'
     return render_template('home.html', title = title, pitch = pitch, advertisement = advertisement, project = project, general = general, sale = sale)
 
 
@@ -131,7 +131,7 @@ def pitch():
         return redirect(url_for('main.index'))
 
 
-    title = 'New Pitch | One Minute Pitch'
+    title = 'New Pitch | Pitches'
     return render_template('pitch.html', title = title, pitch_form = pitch_form, likes = likes)
 
 
@@ -156,7 +156,7 @@ def comment(pitch_id):
         return redirect(url_for('.comment', pitch_id=pitch_id))
 
     comments = Comment.query.filter_by(pitch_id=pitch_id).all()
-    title = 'New Comment | One Min Pitch'
+    title = 'New Comment | Pitches'
 
     return render_template('comment.html', title = title, pitch=pitch ,comment_form = comment_form, comment = comments )
 
